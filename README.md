@@ -1,283 +1,180 @@
-# Food Network - E-commerce App
+# 🛒 Food Network - E-commerce App
 
 A modern food and grocery e-commerce mobile application built with React Native and Expo, featuring user authentication, product browsing, shopping cart functionality, and Firebase integration.
 
-## 📁 File Structure & Documentation
+## ✨ Features
 
-### Complete Project Structure
+### 🔐 Authentication
+- User Registration & Login with secure email/password authentication
+- Profile Management for editing user information
+- Session Persistence with automatic login state management
+- Secure Logout functionality
+
+### 🛍️ Shopping Experience
+- Product Catalog with 10+ categories and 40+ products
+- Search & Filter functionality
+- Category Browsing with organized product categories
+- Product Details with comprehensive information
+
+### 🛒 Shopping Cart
+- Add/Remove Items with easy cart management
+- Quantity Control for adjusting product quantities
+- Real-time Updates with live cart total calculations
+- Cart Persistence with items saved between sessions
+- Clear Cart functionality
+
+### 🔔 Notifications
+- Toast Notifications with animated success/error messages
+- Cart Actions notifications for add/remove operations
+- User Feedback with clear action confirmations
+
+### 🎨 User Interface
+- Modern Design with clean, intuitive interface
+- Dark/Light Theme support with automatic detection
+- Responsive Layout optimized for all screen sizes
+- Smooth Animations for enhanced user experience
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React Native - Cross-platform mobile development
+- Expo - Development platform and tools
+- TypeScript - Type-safe JavaScript
+- Expo Router - File-based navigation
+
+### Backend & Database
+- Firebase Authentication - User authentication service
+- Firestore Database - NoSQL cloud database
+- Firebase Storage - File storage service
+
+### State Management
+- React Context API - Global state management
+- AsyncStorage - Local data persistence
+- Custom Hooks - Reusable logic
+
+### Development Tools
+- ESLint - Code linting
+- TypeScript - Type checking
+- EAS Build - App building and deployment
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
+- Expo CLI
+- Firebase account
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/ARNOB663/Food-Network.git
+   cd Food-Network
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Firebase Setup**
+   - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
+   - Enable Authentication and Firestore Database
+   - Download your `google-services.json` and place it in the project root
+   - Update `config/firebase.ts` with your Firebase configuration
+
+4. **Start the development server**
+   ```bash
+   npm start
+   ```
+
+5. **Run on your preferred platform**
+   ```bash
+   # iOS
+   npm run ios
+   
+   # Android
+   npm run android
+   
+   # Web
+   npm run web
+   ```
+
+## 📁 File Structure
+
 ```
 food-network/
-├── 📱 app/                           # Main application screens and navigation
-│   ├── _layout.tsx                   # Root layout with auth and navigation
-│   ├── login.tsx                     # User login screen
-│   ├── signup.tsx                    # User registration screen
-│   ├── product.tsx                   # Product detail modal
-│   ├── modal.tsx                     # General modal screen
-│   ├── index.tsx                     # Redirect to tabs
-│   ├── +html.tsx                     # HTML template for web
-│   ├── +not-found.tsx                # 404 error page
-│   └── (tabs)/                       # Tab navigation screens
-│       ├── _layout.tsx               # Tab navigation layout
-│       ├── index.tsx                 # Home screen with products
-│       ├── categories.tsx            # Categories browsing
-│       ├── cart.tsx                  # Shopping cart
-│       └── profile.tsx               # User profile
+├── app/                           # Main application screens
+│   ├── _layout.tsx               # Root layout with auth & navigation
+│   ├── login.tsx                 # User login screen
+│   ├── signup.tsx                # User registration screen
+│   ├── product.tsx               # Product detail modal
+│   ├── modal.tsx                 # General modal screen
+│   ├── index.tsx                 # Redirect to tabs
+│   ├── +html.tsx                 # HTML template for web
+│   ├── +not-found.tsx            # 404 error page
+│   └── (tabs)/                   # Tab navigation screens
+│       ├── _layout.tsx           # Tab navigation layout
+│       ├── index.tsx             # Home screen with products
+│       ├── categories.tsx        # Categories browsing
+│       ├── cart.tsx              # Shopping cart
+│       └── profile.tsx           # User profile
 │
-├── 🧩 components/                    # Reusable React components
-│   ├── AuthContext.tsx               # Authentication context
-│   ├── CartContext.tsx               # Shopping cart context
-│   ├── NotificationContext.tsx       # Notification system
-│   ├── Notification.tsx              # Toast notification component
-│   ├── CartNotificationWrapper.tsx   # Cart notification wrapper
-│   ├── DatabaseSeeder.tsx            # Database seeding component
-│   ├── EditScreenInfo.tsx            # Edit screen info component
-│   ├── ExternalLink.tsx              # External link component
-│   ├── StyledText.tsx                # Styled text component
-│   ├── Themed.tsx                    # Themed component wrapper
-│   ├── useClientOnlyValue.ts         # Client-only value hook
-│   ├── useClientOnlyValue.web.ts     # Web-specific hook
-│   ├── useColorScheme.ts             # Color scheme hook
-│   ├── useColorScheme.web.ts         # Web-specific color scheme
-│   └── __tests__/                    # Component tests
+├── components/                    # Reusable React components
+│   ├── AuthContext.tsx           # Authentication context
+│   ├── CartContext.tsx           # Shopping cart context
+│   ├── NotificationContext.tsx   # Notification system
+│   ├── Notification.tsx          # Toast notification component
+│   ├── CartNotificationWrapper.tsx # Cart notification wrapper
+│   ├── DatabaseSeeder.tsx        # Database seeding component
+│   ├── EditScreenInfo.tsx        # Edit screen info component
+│   ├── ExternalLink.tsx          # External link component
+│   ├── StyledText.tsx            # Styled text component
+│   ├── Themed.tsx                # Themed component wrapper
+│   ├── useClientOnlyValue.ts     # Client-only value hook
+│   ├── useClientOnlyValue.web.ts # Web-specific hook
+│   ├── useColorScheme.ts         # Color scheme hook
+│   ├── useColorScheme.web.ts     # Web-specific color scheme
+│   └── __tests__/                # Component tests
 │
-├── 🖼️ assets/                        # Static assets
-│   ├── images/                       # App images
-│   │   ├── icon.png                  # App icon
-│   │   ├── splash-icon.png           # Splash screen
-│   │   ├── adaptive-icon.png         # Android adaptive icon
-│   │   └── favicon.png               # Web favicon
-│   └── fonts/                        # Custom fonts
-│       └── SpaceMono-Regular.ttf     # Custom font
+├── assets/                        # Static assets
+│   ├── images/                   # App images
+│   │   ├── icon.png              # App icon
+│   │   ├── splash-icon.png       # Splash screen
+│   │   ├── adaptive-icon.png     # Android adaptive icon
+│   │   └── favicon.png           # Web favicon
+│   └── fonts/                    # Custom fonts
+│       └── SpaceMono-Regular.ttf # Custom font
 │
-├── ⚙️ config/                        # Configuration files
-│   └── firebase.ts                   # Firebase configuration
+├── config/                        # Configuration files
+│   └── firebase.ts               # Firebase configuration
 │
-├── 🎨 constants/                     # App constants
-│   └── Colors.ts                     # Color scheme definitions
+├── constants/                     # App constants
+│   └── Colors.ts                 # Color scheme definitions
 │
-├── 🔧 services/                      # Business logic services
-│   └── productService.ts             # Product management service
+├── services/                      # Business logic services
+│   └── productService.ts         # Product management service
 │
-├── 📜 scripts/                       # Utility scripts
-│   ├── deploy-firebase.js            # Firebase deployment
-│   ├── populate-database.js          # Database population
-│   ├── populateDatabase.ts           # TypeScript version
-│   └── populateDatabase.js           # Alternative version
+├── scripts/                       # Utility scripts
+│   ├── deploy-firebase.js        # Firebase deployment
+│   ├── populate-database.js      # Database population
+│   ├── populateDatabase.ts       # TypeScript version
+│   └── populateDatabase.js       # Alternative version
 │
-├── 📄 Configuration Files
-│   ├── app.json                      # Expo configuration
-│   ├── package.json                  # Dependencies and scripts
-│   ├── package-lock.json             # Locked dependencies
-│   ├── eas.json                      # EAS build configuration
-│   ├── tsconfig.json                 # TypeScript configuration
-│   ├── .gitignore                    # Git ignore rules
-│   ├── expo-env.d.ts                 # Expo environment types
-│   ├── firebase.json                 # Firebase project config
-│   ├── firestore.rules               # Firestore security rules
-│   ├── firestore.indexes.json        # Database indexes
-│   └── storage.rules                 # Storage security rules
-│
-├── 📚 Documentation
-│   ├── README.md                     # This file
-│   ├── DEPLOYMENT.md                 # Deployment guide
-│   └── TROUBLESHOOTING.md            # Troubleshooting guide
-│
-└── 🔧 Development Files
-    ├── .expo/                        # Expo development files
-    ├── .git/                         # Git repository
-    ├── .vscode/                      # VS Code settings
-    └── node_modules/                 # Dependencies (not tracked)
+├── app.json                      # Expo configuration
+├── package.json                  # Dependencies and scripts
+├── eas.json                      # EAS build configuration
+├── firebase.json                 # Firebase project config
+├── firestore.rules               # Firestore security rules
+├── firestore.indexes.json        # Database indexes
+├── storage.rules                 # Storage security rules
+├── README.md                     # This file
+├── DEPLOYMENT.md                 # Deployment guide
+└── TROUBLESHOOTING.md            # Troubleshooting guide
 ```
 
-## 📱 App Directory (`/app`)
-
-### Main Layout
-- **`_layout.tsx`** - Root layout component that handles:
-  - Authentication state management
-  - Navigation routing based on user login status
-  - Theme provider setup
-  - Font loading and splash screen
-
-### Authentication Screens
-- **`login.tsx`** - User login screen with:
-  - Email/password authentication
-  - Form validation
-  - Error handling
-  - Navigation to signup
-
-- **`signup.tsx`** - User registration screen with:
-  - New user account creation
-  - Name, email, and password fields
-  - Form validation
-  - Navigation to login
-
-### Tab Navigation (`/app/(tabs)`)
-- **`_layout.tsx`** - Tab navigation layout with:
-  - Bottom tab bar configuration
-  - Cart badge with item count
-  - Authentication protection
-  - Tab icons and labels
-
-#### Tab Screens
-- **`index.tsx`** - Home screen featuring:
-  - Featured products display
-  - Search functionality
-  - Category browsing
-  - Product grid layout
-
-- **`categories.tsx`** - Categories screen with:
-  - Product category filtering
-  - Category-based product display
-  - Product cards with add to cart
-
-- **`cart.tsx`** - Shopping cart screen including:
-  - Cart items display
-  - Quantity management
-  - Remove items functionality
-  - Total price calculation
-  - Clear cart option
-
-- **`profile.tsx`** - User profile screen with:
-  - User information display
-  - Profile editing modal
-  - Account management options
-  - Logout functionality
-
-### Modal Screens
-- **`modal.tsx`** - Modal screen for additional features
-- **`product.tsx`** - Product detail modal with:
-  - Detailed product information
-  - Add to cart functionality
-  - Product images and descriptions
-
-## 🧩 Components Directory (`/components`)
-
-### Context Providers
-- **`AuthContext.tsx`** - Authentication context providing:
-  - User state management
-  - Login/logout functions
-  - Profile update functionality
-  - Firebase authentication integration
-
-- **`CartContext.tsx`** - Shopping cart context with:
-  - Cart state management
-  - Add/remove items
-  - Quantity updates
-  - Cart persistence with AsyncStorage
-  - Total calculations
-
-- **`NotificationContext.tsx`** - Notification system providing:
-  - Toast notifications
-  - Success/error/info messages
-  - Animated notification display
-
-### UI Components
-- **`Notification.tsx`** - Toast notification component with:
-  - Animated slide-in/out
-  - Multiple notification types
-  - Auto-dismiss functionality
-  - Platform-specific styling
-
-### Utility Components
-- **`useColorScheme.tsx`** - Theme hook for dark/light mode
-- **`useClientOnlyValue.tsx`** - Client-side value hook
-
-## ⚙️ Configuration Directory (`/config`)
-
-- **`firebase.ts`** - Firebase configuration including:
-  - Firebase app initialization
-  - Authentication setup
-  - Firestore database connection
-  - Project configuration
-
-## 🎨 Constants Directory (`/constants`)
-
-- **`Colors.ts`** - App color scheme with:
-  - Light and dark theme colors
-  - Primary/secondary colors
-  - Background and text colors
-
-## 🔧 Services Directory (`/services`)
-
-- **`productService.ts`** - Product management service with:
-  - Product data fetching
-  - Search functionality
-  - Category filtering
-  - Sample product data
-  - Firestore integration
-
-## 📜 Scripts Directory (`/scripts`)
-
-- **`deploy-firebase.js`** - Firebase deployment script for:
-  - Firestore security rules deployment
-  - Storage rules deployment
-  - Firebase project configuration
-
-- **`populate-database.js`** - Database population script with:
-  - Sample product data insertion
-  - Category creation
-  - Firestore data seeding
-
-## 🖼️ Assets Directory (`/assets`)
-
-### Images
-- **`images/icon.png`** - App icon
-- **`images/splash-icon.png`** - Splash screen image
-- **`images/adaptive-icon.png`** - Android adaptive icon
-- **`images/favicon.png`** - Web favicon
-
-### Fonts
-- **`fonts/SpaceMono-Regular.ttf`** - Custom font for the app
-
-## 📄 Configuration Files
-
-### App Configuration
-- **`app.json`** - Expo configuration with:
-  - App metadata (name, version, etc.)
-  - Platform-specific settings
-  - Splash screen configuration
-  - Bundle identifiers
-
-### Package Management
-- **`package.json`** - Project dependencies and scripts:
-  - React Native and Expo dependencies
-  - Firebase packages
-  - Development tools
-  - Build and deployment scripts
-
-### Build Configuration
-- **`eas.json`** - EAS build configuration for:
-  - Development builds
-  - Preview builds
-  - Production builds
-  - Platform-specific settings
-
-### Version Control
-- **`.gitignore`** - Git ignore rules for:
-  - Node modules
-  - Build artifacts
-  - Platform-specific files
-  - Environment files
-
-## 🔐 Firebase Configuration Files
-
-### Security Rules
-- **`firestore.rules`** - Firestore security rules for:
-  - User data protection
-  - Product read access
-  - Order management
-  - Authentication requirements
-
-- **`storage.rules`** - Firebase Storage rules for:
-  - File access control
-  - User upload permissions
-  - Security restrictions
-
-### Firebase Configuration
-- **`firebase.json`** - Firebase project configuration
-- **`firestore.indexes.json`** - Database indexes for queries
-
-## 🚀 Available Scripts
+## 🔧 Available Scripts
 
 ### Development
 ```bash
@@ -310,62 +207,95 @@ npm run lint:fix          # Fix linting issues
 npm run type-check        # TypeScript checking
 ```
 
-## 🔧 Key Features by File
+## 🔐 Firebase Setup
 
-### Authentication Flow
-1. **`app/_layout.tsx`** - Checks authentication state
-2. **`components/AuthContext.tsx`** - Manages user session
-3. **`app/login.tsx`** - User login interface
-4. **`app/signup.tsx`** - User registration interface
+### 1. Create Firebase Project
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Create a new project
+3. Enable Authentication (Email/Password)
+4. Enable Firestore Database
+5. Enable Storage (optional)
 
-### Shopping Cart Flow
-1. **`components/CartContext.tsx`** - Cart state management
-2. **`app/(tabs)/index.tsx`** - Add items to cart
-3. **`app/(tabs)/cart.tsx`** - Cart management interface
-4. **`components/Notification.tsx`** - Cart action notifications
+### 2. Configure Security Rules
 
-### Product Management
-1. **`services/productService.ts`** - Product data and operations
-2. **`app/(tabs)/categories.tsx`** - Category browsing
-3. **`app/(tabs)/index.tsx`** - Product display and search
-4. **`app/product.tsx`** - Product details
+**Firestore Rules** (`firestore.rules`):
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can read/write their own data
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Anyone can read products
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if false;
+    }
+    
+    // Users can read/write their own orders
+    match /orders/{orderId} {
+      allow read, write: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+  }
+}
+```
 
-### User Profile
-1. **`app/(tabs)/profile.tsx`** - Profile management interface
-2. **`components/AuthContext.tsx`** - Profile update functions
-3. **`app/_layout.tsx`** - Logout handling
+**Storage Rules** (`storage.rules`):
+```javascript
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+  }
+}
+```
+
+### 3. Deploy Rules
+```bash
+npm run deploy:firebase
+```
+
+### 4. Populate Database
+```bash
+npm run populate:db
+```
 
 ## 🏗️ Architecture Overview
 
 ### State Management
-- **Context API** for global state (Auth, Cart, Notifications)
-- **Local State** for component-specific data
-- **AsyncStorage** for persistent data
+- Context API for global state (Auth, Cart, Notifications)
+- Local State for component-specific data
+- AsyncStorage for persistent data
 
 ### Navigation
-- **Expo Router** for declarative routing
-- **Stack Navigation** for modal screens
-- **Tab Navigation** for main app sections
+- Expo Router for declarative routing
+- Stack Navigation for modal screens
+- Tab Navigation for main app sections
 
 ### Data Flow
-- **Firebase Auth** for user authentication
-- **Firestore** for product and user data
-- **AsyncStorage** for local cart persistence
-- **Context API** for state synchronization
+- Firebase Auth for user authentication
+- Firestore for product and user data
+- AsyncStorage for local cart persistence
+- Context API for state synchronization
 
 ## 🔒 Security Features
 
-- **Firebase Security Rules** for data protection
-- **Authentication Guards** for protected routes
-- **Input Validation** for form data
-- **Error Handling** for robust operation
+- Firebase Security Rules for data protection
+- Authentication Guards for protected routes
+- Input Validation for form data
+- Error Handling for robust operation
 
 ## 📱 Platform Support
 
-- **iOS** - Native iOS app
-- **Android** - Native Android app
-- **Web** - Progressive web app
-- **Cross-platform** - Shared codebase
+- iOS - Native iOS app
+- Android - Native Android app
+- Web - Progressive web app
+- Cross-platform - Shared codebase
 
 ## 🎯 Development Guidelines
 
@@ -384,14 +314,83 @@ npm run type-check        # TypeScript checking
 - Separate concerns (UI, logic, data)
 - Use TypeScript for type safety
 
-## 📚 Additional Documentation
+## 🚀 Deployment
 
-- **`DEPLOYMENT.md`** - Detailed deployment guide
-- **Firebase Console** - Backend configuration
-- **Expo Documentation** - Platform-specific guides
+### Pre-deployment Checklist
+- [ ] Firebase project configured
+- [ ] Security rules deployed
+- [ ] Database populated
+- [ ] Environment variables set
+- [ ] App icons and splash screens updated
+- [ ] Bundle identifiers configured
+
+### Build Commands
+```bash
+# Development build
+eas build --profile development --platform all
+
+# Preview build
+eas build --profile preview --platform all
+
+# Production build
+eas build --profile production --platform all
+```
+
+### Submit to Stores
+```bash
+# Android
+eas submit --platform android
+
+# iOS
+eas submit --platform ios
+```
+
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+
+## 🐛 Troubleshooting
+
+Common issues and solutions:
+
+### Firebase Permissions Error
+```bash
+# Deploy security rules
+npm run deploy:firebase
+```
+
+### Navigation Issues
+- Check authentication state in `app/_layout.tsx`
+- Verify tab navigation in `app/(tabs)/_layout.tsx`
+
+### Build Errors
+- Clear cache: `expo r -c`
+- Reset Metro: `npx expo start --clear`
+
+For more troubleshooting tips, see [TROUBLESHOOTING.md](./TROUBLESHOOTING.md).
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**ARNOB663**
+- GitHub: [@ARNOB663](https://github.com/ARNOB663)
+
+## 🙏 Acknowledgments
+
+- [Expo](https://expo.dev/) for the amazing development platform
+- [Firebase](https://firebase.google.com/) for backend services
+- [React Native](https://reactnative.dev/) for cross-platform development
+- [React Navigation](https://reactnavigation.org/) for navigation solutions
 
 ---
 
-**Food Network** - Fresh groceries delivered to your door! 🛒🥬🍎
-#   F o o d - N e t w o r k  
- 
+**Made with ❤️ for fresh groceries delivery! 🛒🥬🍎**
